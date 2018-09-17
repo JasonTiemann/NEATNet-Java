@@ -200,7 +200,6 @@ class Specimen{
             } 
         }
         Connection connection = new Connection(fromPosition,toPosition);
-        
     }
     public String getShape(){
         String shape = "";
@@ -208,6 +207,11 @@ class Specimen{
             shape+=Integer.toString(this.nodeLayers.get(i).size());
         }
         return shape;
+    }
+    public List<Float> activate(List<Float> input){
+        if(input.size() != this.nodeLayers.get(0).size()){
+            throw new java.lang.Error("Mismatched input and inputNodes count");
+        }
     }
     @Override
     public Object clone()throws CloneNotSupportedException{
