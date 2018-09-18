@@ -226,6 +226,15 @@ class Specimen{
             this.nodeLayers.get(0).get(i).add(input.get(i));
             float nodeOutput = this.nodeLayers.get(0).get(i).activate();
             List<Connection> connections = this.genomes.getConnectionsFor("i"+Integer.toString(i));
+            for (int connection=0;connection<connections.size();connection++){
+                String toPos = connections.get(connection).toPos;
+                if (toPos.contains("o")){
+                    this.nodeLayers.get(this.nodeLayers.size()-1).get(Integer.parseInt(toPos.replace(toPos, "o"))).add(nodeOutput);
+                }else if(toPos.contains("h")){
+                    String[] hiddenPlace = toPos.split("h");
+                    this.nodeLayers.get(Integer.parseInt(hiddenPlace[0])+1).get(Integer.parseInt(hiddenPlace[1])).add(nodeOutput);
+                }
+            }
             
         }
         
