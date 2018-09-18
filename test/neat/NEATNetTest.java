@@ -43,7 +43,7 @@ public class NEATNetTest {
     @Test
     public void testClone() throws Exception {
         System.out.println("clone");
-        NEATNet instance = null;
+        Specimen instance = null;
         Object expResult = null;
         Object result = instance.clone();
         assertEquals(expResult, result);

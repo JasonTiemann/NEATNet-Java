@@ -32,7 +32,8 @@ class Node{
             output = this.totalInput;
             break;
     }
-        return output;
+    this.totalInput = 0;
+    return output;
   }
 }
 class GenotypeList{
@@ -103,6 +104,15 @@ class GenotypeList{
             }
         }
         this.genotypes = currentGenotypeList;
+    }
+    public List<Connection> getConnectionsFor(String node){
+        List<Connection> connections = new ArrayList<>();
+        for (int i=0;i<this.genotypes.size();i++){
+            if (this.genotypes.get(i).connectionVector.fromPos == node){
+                connections.add(this.genotypes.get(i).connectionVector);
+            }
+        }
+        return connections;
     }
 }
 class Genotype{
@@ -212,6 +222,15 @@ class Specimen{
         if(input.size() != this.nodeLayers.get(0).size()){
             throw new java.lang.Error("Mismatched input and inputNodes count");
         }
+        for (int i=0;i<this.nodeLayers.get(0).size();i++){
+            this.nodeLayers.get(0).get(i).add(input.get(i));
+            float nodeOutput = this.nodeLayers.get(0).get(i).activate();
+            List<Connection> connections = this.genomes.getConnectionsFor("i"+Integer.toString(i));
+            
+        }
+        
+        List<Float> output = new ArrayList<>();
+        return output;
     }
     @Override
     public Object clone()throws CloneNotSupportedException{
